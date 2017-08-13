@@ -1,9 +1,5 @@
 const express = require('express');
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
 const mongoose = require('mongoose');
-
-const app = express();
 
 var url = 'mongodb://localhost:27017/jade';
 
@@ -18,14 +14,7 @@ db.on('error', function(err){
     console.log(err);
 });
 
-// MongoClient.connect(process.env.MONGODB_URI || url, function(err, db){
-//     if(err){
-//         console.log('Unable to connect to the mongoDB server. Error:', err);
-//     } else {
-//         console.log('Connection established to the DB.');
-//         db.close();
-//     }
-// });
+const app = express();
 
 app.get('/', function(req, res){
     res.send('Hello World');
