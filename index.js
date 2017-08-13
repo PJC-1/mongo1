@@ -5,14 +5,13 @@ const MongoClient = mongodb.MongoClient;
 const app = express();
 
 var url = 'mongodb://localhost:27017/jade';
-
-console.log(url);
+process.env.MONGODB_URI
 
 MongoClient.connect(process.env.MONGODB_URI || url, function(err, db){
     if(err){
         console.log('Unable to connect to the mongoDB server. Error:', err);
     } else {
-        console.log('Connection established to', url);
+        console.log('Connection established to the DB.');
         db.close();
     }
 });
