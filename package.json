@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
-    "mongoose": "^4.10.8"
+    "mongoose": "^4.10.8",
+    "pug": "^2.0.0-rc.3"
   }
 }
