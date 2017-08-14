@@ -24,8 +24,29 @@ app.set('view engine', 'pug');
 
 // Home Route
 app.get('/', function(req, res){
+    let articles = [
+        {
+            id:1,
+            title:'Article One',
+            author:'PJC1',
+            body:'This is article one'
+        },
+        {
+            id:2,
+            title:'Article Two',
+            author:'McDowell',
+            body:'This is article two'
+        },
+        {
+            id:3,
+            title:'Article Three',
+            author:'Duckett',
+            body:'This is article three'
+        }
+    ];
     res.render('index', {
-        title:'Articles'
+        title:'Articles',
+        articles: articles
     });
 });
 
