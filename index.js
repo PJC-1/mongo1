@@ -116,6 +116,19 @@ app.post('/articles/edit/:id', function(req, res){
     });
 });
 
+// Delete Route
+app.delete('/article/:id', function(req, res){
+    let query = {_id:req.params.id};
+
+    Article.remove(query, function(err){
+        if(err){
+            console.log(err);
+        } else {
+            res.send('Success');
+        }
+    });
+});
+
 // Start Server
 app.listen(process.env.PORT || 3000, function(){
     console.log('You are listening to the smooth sounds of port 3000...');
