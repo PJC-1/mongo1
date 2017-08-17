@@ -117,21 +117,34 @@ app.get('/article/edit/:id', function(req, res){
 
 // Add Submit POST Route
 app.post('/articles/add', function(req, res){
-    let article = new Article();
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('author', 'Author is required').notEmpty();
+    req.checkBody('body', 'Body is required').notEmpty();
 
-    article.save(function(err){
-        if(err){
+    // Get errors
+    let errors = req.validationErrors();
+
+    if(errors){
+        res.render('add_article', {
+            title:'Add Article',
+            errors:errors
+        });
+    } else {
+        let article = new Article();
+        article.title = req.body.title;
+        article.author = req.body.author;
+        article.body = req.body.body;
+
+        article.save(function(err){
+          if(err){
             console.log(err);
             return;
-        } else {
+          } else {
             req.flash('success', 'Article Added');
             res.redirect('/');
-        }
-    });
-
+          }
+        });
+    }
 });
 
 // Update Submit POST Route
@@ -148,6 +161,7 @@ app.post('/articles/edit/:id', function(req, res){
             console.log(err);
             return;
         } else {
+            req.flash('success', 'Article Updated');
             res.redirect('/');
         }
     });
@@ -161,6 +175,7 @@ app.delete('/article/:id', function(req, res){
         if(err){
             console.log(err);
         } else {
+            req.flash('danger', 'Article Deleted');
             res.send('Success');
         }
     });
