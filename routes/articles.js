@@ -3,9 +3,11 @@ const router = express.Router();
 
 // Bring in Article Model
 let Article = require('../models/article');
+// Bring in User Model
+let User = require('../models/user');
 
 // Add Route
-router.get('/add', function(req, res){
+router.get('/add', ensureAthenticated, function(req, res){
     res.render('add_article', {
         title: 'Add Article'
     });
@@ -90,10 +92,23 @@ router.delete('/:id', function(req, res){
 // Get Single Article
 router.get('/:id', function(req, res){
     Article.findById(req.params.id, function(err, article){
-        res.render('article', {
-            article:article
+        User.findById(article.author, function(err, user){
+          res.render('article', {
+            article:article,
+            author: user.name
+          });
         });
     });
 });
+
+// Access Control
+function ensureAthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else {
+        req.flash('danger', 'Please login');
+        res.redirect('/users/login');
+    }
+}
 
 module.exports = router;
