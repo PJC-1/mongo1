@@ -9,8 +9,8 @@ const config = require('./config/database');
 
 var url = config.database;
 
-// mongoose.connect(process.env.MONGODB_URI || url);
-mongoose.connect(url);
+mongoose.connect(process.env.MONGODB_URI || url);
+// mongoose.connect(url);
 
 let db = mongoose.connection;
 
