@@ -5,12 +5,12 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
+const config = require('./config/database');
 
+var url = config.database;
 
-var url = 'mongodb://localhost:27017/jade';
-
-mongoose.connect(process.env.MONGODB_URI || url);
-// mongoose.connect(url);
+// mongoose.connect(process.env.MONGODB_URI || url);
+mongoose.connect(url);
 
 let db = mongoose.connection;
 
