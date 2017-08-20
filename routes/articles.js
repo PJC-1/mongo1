@@ -16,10 +16,15 @@ router.get('/add', ensureAthenticated, function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAthenticated, function(req, res){
     Article.findById(req.params.id, function(err, article){
-        res.render('edit_article', {
-            title:'Edit Article',
-            article:article
-        });
+        if(article.author != req.user._id){
+            req.flash('danger', 'Not Authorized');
+            res.redirect('/');
+        } else {
+            res.render('edit_article', {
+              title:'Edit Article',
+              article:article
+            });
+        }
     });
 });
 
@@ -77,14 +82,24 @@ router.post('/edit/:id', function(req, res){
 
 // Delete Route
 router.delete('/:id', function(req, res){
-    let query = {_id:req.params.id};
+    if(!req.user._id){
+        res.status(500).send();
+    }
 
-    Article.remove(query, function(err){
-        if(err){
-            console.log(err);
+    let query = {_id:req.params.id}
+
+    Article.findById(req.params.id, function(err, article){
+        if(article.author != req.user._id){
+            res.status(500).send();
         } else {
-            req.flash('danger', 'Article Deleted');
-            res.send('Success');
+            Article.remove(query, function(err){
+              if(err){
+                console.log(err);
+              } else {
+                req.flash('danger', 'Article Deleted');
+                res.send('Success');
+              }
+            });
         }
     });
 });
