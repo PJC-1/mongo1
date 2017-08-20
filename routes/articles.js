@@ -16,12 +16,9 @@ router.get('/add', ensureAthenticated, function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAthenticated, function(req, res){
     Article.findById(req.params.id, function(err, article){
-        User.findById(article.author, function(err, user){
-          res.render('edit_article', {
+        res.render('edit_article', {
             title:'Edit Article',
-            article:article,
-            author:user.name
-          });
+            article:article
         });
     });
 });
