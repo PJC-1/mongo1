@@ -14,11 +14,14 @@ router.get('/add', ensureAthenticated, function(req, res){
 });
 
 // Load Edit Form
-router.get('/edit/:id', function(req, res){
+router.get('/edit/:id', ensureAthenticated, function(req, res){
     Article.findById(req.params.id, function(err, article){
-        res.render('edit_article', {
+        User.findById(article.author, function(err, user){
+          res.render('edit_article', {
             title:'Edit Article',
-            article:article
+            article:article,
+            author:user.name
+          });
         });
     });
 });
@@ -90,7 +93,7 @@ router.delete('/:id', function(req, res){
 });
 
 // Get Single Article
-router.get('/:id', function(req, res){
+router.get('/:id', ensureAthenticated, function(req, res){
     Article.findById(req.params.id, function(err, article){
         User.findById(article.author, function(err, user){
           res.render('article', {
