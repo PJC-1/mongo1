@@ -90,7 +90,7 @@ router.delete('/:id', function(req, res){
 });
 
 // Get Single Article
-router.get('/:id', ensureAthenticated, function(req, res){
+router.get('/:id', function(req, res){
     Article.findById(req.params.id, function(err, article){
         User.findById(article.author, function(err, user){
           res.render('article', {
