@@ -17,4 +17,5 @@ let articleSchema = new Schema({
     }
 });
 
+// the model Article is for the articles collection in the database
 let Article = module.exports = mongoose.model('Article', articleSchema);

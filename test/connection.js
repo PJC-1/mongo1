@@ -15,7 +15,16 @@ before(function(done){
       console.log('connection to db established...');
       done();
     });
+
     db.on('error', function(err){
       console.log(err);
+    });
+});
+
+// Drop the Articles collection before each test
+beforeEach(function(done){
+    // Drop the collection
+    mongoose.connection.collections.articles.drop().then(function(){
+        done();
     });
 });
