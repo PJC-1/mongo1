@@ -24,7 +24,7 @@ before(function(done){
 // Drop the Articles collection before each test
 beforeEach(function(done){
     // Drop the collection
-    mongoose.connection.collections.articles.drop().then(function(){
+    mongoose.connection.collections.articles.drop(function(){
         done();
     });
 });
