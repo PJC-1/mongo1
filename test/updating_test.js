@@ -7,9 +7,9 @@ describe('Updating records', function(){
 
     beforeEach(function(done){
         art = new Article({
-            title : 'new article',
-            author : 'article author',
-            body : 'article test body'
+            title   : 'new article'
+            ,author : 'article author'
+            ,body   : 'article test body'
         });
 
         art.save().then(function(){

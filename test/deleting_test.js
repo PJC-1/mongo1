@@ -7,9 +7,9 @@ describe('Delete records', function(){
 
     beforeEach(function(done){
         art = new Article({
-            title : 'test title',
-            author: 'test author',
-            body: 'test body'
+            title  : 'test title'
+            ,author : 'test author'
+            ,body   : 'test body'
         });
 
         art.save().then(function(){

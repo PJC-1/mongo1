@@ -7,9 +7,9 @@ var art;
 describe('finding records', function(){
     beforeEach(function(done){
         art = new Article({
-            title : "test finding a record",
-            author : "tester",
-            body : "testing with mocha is fun."
+            title   : "test finding a record"
+            ,author : "tester"
+            ,body   : "testing with mocha is fun."
         });
 
         art.save().then(function(){

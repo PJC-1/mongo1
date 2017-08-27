@@ -6,14 +6,14 @@ describe('Saving records', function(){
     // Create tests
     it('Saves a record to the database', function(){
         var article = new Article({
-            title : "test",
-            author : "mocha",
-            body : "test mocha"
+            title   : "test"
+            ,author : "mocha"
+            ,body   : "test mocha"
         });
 
         article.save().then(function(done){
-          assert(article.isNew === false);
-          done();
+            assert(article.isNew === false);
+            done();
         });
     });
 });
