@@ -3,7 +3,9 @@ const articles = require('../routes/articles');
 
 describe('article routes', function(){
     it('is articles get route', function(done){
-        request(articles).get('/add').expect(200);
+        request(articles).get('/add')
+        .expect(200)
+        .expect(/Add Article/);
         done();
     });
 });

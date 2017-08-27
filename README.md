@@ -23,6 +23,13 @@ heroku logs --trail
 
 helpful hint: To avoid the potential trouble of having to debug a lot of deployment issues, deploy early on while your app is very simple and root case of issues will be limited and easier to resolve. In my case I set up a very bare bones node app, got express server running, created and deployed the app to heroku, and then implemented the connection to mlab database. From this point problems deploying to heroku will be minimal and more transparent.
 
+
+TESTING:
+
+using supertest to handle testing routes.
+
+
+
 OTHER:
 
 environment variable setting syntax:

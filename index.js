@@ -87,25 +87,13 @@ app.get('*', function(req, res, next){
     next();
 });
 
-// Home Route
-app.get('/', function(req, res){
-    Article.find({}, function(err, articles){
-        if(err){
-            console.log(err);
-        } else {
-            res.render('index', {
-              title:'Articles',
-              articles: articles
-            });
-        }
-    });
-});
-
 // Route Files
 let articles = require('./routes/articles');
 let users = require('./routes/users');
+let index = require('./routes/index');
 app.use('/articles', articles);
 app.use('/users', users);
+app.use(index);
 
 
 // Start Server
