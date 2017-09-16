@@ -16,14 +16,19 @@ router.get('/add', ensureAthenticated, function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAthenticated, function(req, res){
     Article.findById(req.params.id, function(err, article){
-        if(article.author != req.user._id){
-            req.flash('danger', 'Not Authorized');
-            res.redirect('/');
+        if(err){
+            console.log(err);
+            return;
         } else {
-            res.render('edit_article', {
-              title:'Edit Article',
-              article:article
-            });
+            if(article.author != req.user._id){
+                req.flash('danger', 'Not Authorized');
+                res.redirect('/');
+            } else {
+                res.render('edit_article', {
+                  title:'Edit Article',
+                  article:article
+                });
+            }
         }
     });
 });
